@@ -11,6 +11,6 @@ spring:
     properties:
       hibernate:
         show_sql: true
-        format_sql: ture
+        format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
 
