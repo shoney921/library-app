@@ -8,6 +8,7 @@ import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory;
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository;
 import com.group.libraryapp.dto.book.request.BookCreateRequest;
 import com.group.libraryapp.dto.book.request.BookLoanRequest;
+import com.group.libraryapp.dto.book.request.BookReturnRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -32,16 +33,26 @@ public class BookService {
 
     @Transactional
     public void loanBook(BookLoanRequest request) {
-        // 책 정보 가져옴
         Book book = bookRepository.findByName(request.getBookName()).orElseThrow(IllegalArgumentException::new);
-        // 대출기록 정보를 확인해서 대출중인지 확인하고 대출중이면 익셉션 발생
+
         if (userLoanHistoryRepository.existsByBookNameAndIsReturn(book.getName(), false)) {
             throw new IllegalArgumentException("이미 대출된 책입니다.");
         }
-        // 유저 정보 가져옴
+
         User user = userJpaRepository.findByName(request.getUserName())
                 .orElseThrow(IllegalArgumentException::new);
-        // 유저 대출 정보 추가
+
         userLoanHistoryRepository.save(new UserLoanHistory(user.getId(), book.getName()));
+    }
+
+    @Transactional
+    public void returnBook(BookReturnRequest request) {
+        User user = userJpaRepository.findByName(request.getUserName())
+                .orElseThrow(IllegalArgumentException::new);
+
+        UserLoanHistory userLoanHistory = userLoanHistoryRepository.findByUserIdAndBookName(user.getId(), request.getBookName())
+                .orElseThrow(IllegalArgumentException::new);
+
+        userLoanHistory.doReturn();
     }
 }
