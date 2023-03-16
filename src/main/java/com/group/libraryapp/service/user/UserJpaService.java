@@ -35,14 +35,13 @@ public class UserJpaService implements UserService {
     public void updateUser(UserUpdateRequest request) {
         User user = userJpaRepository.findById(request.getId())
                 .orElseThrow(IllegalAccessError::new);
-
         user.updateName(request.getName());
         userJpaRepository.save(user);
     }
 
     @Override
     public void deleteUser(String name) {
-        List<User> users = userJpaRepository.findByName(name);
-        users.stream().forEach(user -> userJpaRepository.delete(user));
+        User user = userJpaRepository.findByName(name).orElseThrow(IllegalArgumentException::new);
+        userJpaRepository.delete(user);
     }
 }
