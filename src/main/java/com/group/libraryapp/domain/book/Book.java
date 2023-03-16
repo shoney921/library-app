@@ -1,18 +1,32 @@
 package com.group.libraryapp.domain.book;
 
+import javax.persistence.*;
+
+@Entity
 public class Book {
 
-    String name;
-    Integer count;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id = null;
+
+    @Column(nullable = false, length = 255)
+    private String name;
+
+    protected Book() {
+    }
+
+    public Book(String name) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException(String.format("책 이름으로 잘못된 name(%s)이 들어왔습니다.", name));
+        }
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
-    }
-    public Integer getCount() {
-        return count;
-    }
-    public Book(String name, Integer count) {
-        this.name = name;
-        this.count = count;
     }
 }
