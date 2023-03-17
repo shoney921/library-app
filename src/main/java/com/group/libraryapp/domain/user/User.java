@@ -1,6 +1,10 @@
 package com.group.libraryapp.domain.user;
 
+import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class User {
@@ -11,6 +15,9 @@ public class User {
     @Column(nullable = false, length = 20)
     private String name;
     private Integer age;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserLoanHistory> userLoanHistoryList = new ArrayList<>();
 
     protected User() {
     }
