@@ -37,4 +37,10 @@ public class UserController {
     public void deleteUser(@RequestParam String name) {
         userService.deleteUser(name);
     }
+
+    @PostMapping("/test")
+    public void testUser(@RequestBody UserCreateRequest request) {
+        userService.testUser(request);
+    }
+
 }

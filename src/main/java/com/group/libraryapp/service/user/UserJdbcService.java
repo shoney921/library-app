@@ -38,4 +38,9 @@ public class UserJdbcService implements UserService {
         }
         userJdbcRepository.deleteUserName(name);
     }
+
+    @Override
+    public void testUser(UserCreateRequest request) {
+
+    }
 }

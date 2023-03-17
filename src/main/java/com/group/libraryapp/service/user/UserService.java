@@ -12,4 +12,6 @@ public interface UserService {
     List<UserResponse> getUsers();
     void updateUser(UserUpdateRequest request);
     void deleteUser(String name);
+
+    void testUser(UserCreateRequest request);
 }
