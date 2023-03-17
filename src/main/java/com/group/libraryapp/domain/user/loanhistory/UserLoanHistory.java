@@ -11,6 +11,7 @@ public class UserLoanHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id = null;
 
+    @JoinColumn(nullable = false)
     @ManyToOne
     private User user;
 
