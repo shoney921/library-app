@@ -1,19 +1,17 @@
 package com.group.libraryapp.repository.user;
 
 import com.group.libraryapp.dto.user.response.UserResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Repository
 public class UserJdbcRepository {
 
     private final JdbcTemplate jdbcTemplate;
-
-    public UserJdbcRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
     public boolean isUserNotExist(long id) {
         String readSql = "SELECT * FROM user WHERE id =?";

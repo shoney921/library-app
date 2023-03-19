@@ -5,6 +5,7 @@ import com.group.libraryapp.domain.user.UserJpaRepository;
 import com.group.libraryapp.dto.user.request.UserCreateRequest;
 import com.group.libraryapp.dto.user.request.UserUpdateRequest;
 import com.group.libraryapp.dto.user.response.UserResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +14,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Primary
+@RequiredArgsConstructor
 @Service
 public class UserJpaService implements UserService {
 
     private final UserJpaRepository userJpaRepository;
-
-    public UserJpaService(UserJpaRepository userJpaRepository) {
-        this.userJpaRepository = userJpaRepository;
-    }
 
     public void saveUser(UserCreateRequest request) {
         User user = userJpaRepository.save(new User(request.getName(), request.getAge()));

@@ -4,18 +4,16 @@ import com.group.libraryapp.dto.user.request.UserCreateRequest;
 import com.group.libraryapp.dto.user.request.UserUpdateRequest;
 import com.group.libraryapp.dto.user.response.UserResponse;
 import com.group.libraryapp.repository.user.UserJdbcRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class UserJdbcService implements UserService {
 
     private final UserJdbcRepository userJdbcRepository;
-
-    public UserJdbcService(UserJdbcRepository userJdbcRepository) {
-        this.userJdbcRepository = userJdbcRepository;
-    }
 
     public void saveUser(UserCreateRequest request) {
         userJdbcRepository.saveUser(request.getName(), request.getAge());

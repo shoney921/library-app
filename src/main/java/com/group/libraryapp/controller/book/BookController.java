@@ -4,19 +4,17 @@ import com.group.libraryapp.dto.book.request.BookCreateRequest;
 import com.group.libraryapp.dto.book.request.BookLoanRequest;
 import com.group.libraryapp.dto.book.request.BookReturnRequest;
 import com.group.libraryapp.service.book.BookService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@RequiredArgsConstructor
 @RestController
 public class BookController {
 
     BookService bookService;
-
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
-    }
 
     @PostMapping("/book")
     public void saveBook(@RequestBody BookCreateRequest request) {
